@@ -4,19 +4,21 @@ import requests
 import json
 import csv
 import operator
+import time
 from course_list import course_list
 from secure import oauth_token
-
+timestr = time.strftime("%Y-%m-%d")
 data = []
 # list of data we want from the API call
 counter = 0
 for course_id in course_list:
     # loop over all of the courses in the course list
     url = 'https://harvard.instructure.com/api/v1/courses/%s?include=storage_quota_used_mb' % str(course_id)
+#    url = 'https://harvard.instructure.com/api/v1/courses/sis_course_id:%s?include=storage_quota_used_mb' % str(course_id)
 
     # call the API and raise exceptions as needed
     headers = {
-        'Authorization': 'Bearer {}'.format(TOKEN),
+        'Authorization': 'Bearer {}'.format(oauth_token),
     }
 
     try: 
@@ -50,7 +52,7 @@ for course_id in course_list:
     print counter
 
 # Writing the information from data to a CSV file
-with open('course_settings.csv', 'wb') as f:
+with open('gsd_course_information_%s.csv' %str(timestr), 'wb') as f:
     writer = csv.writer(f)
     writer.writerow(['course_name', 'course_code', 'sis_course_id', 'canvas_course_id', 'workflow_state', 'account_id', 'canvas_enrollment_term_id', 'homepage_type', 'public course', 'course open to auth users', 'public syllabus', 'storage_quota_mb', 'storage_quota_used_mb', 'hide_final_grades'])
     writer.writerows(data)
