@@ -5,13 +5,13 @@ import json
 import csv
 import operator
 import time
-from course_list import course_list
+from course_list import gsd_course_list
 from secure import oauth_token
 timestr = time.strftime("%Y-%m-%d")
 data = []
 # list of data we want from the API call
 counter = 0
-for course_id in course_list:
+for course_id in gsd_course_list:
     # loop over all of the courses in the course list
     url = 'https://harvard.instructure.com/api/v1/courses/%s?include=storage_quota_used_mb' % str(course_id)
 #    url = 'https://harvard.instructure.com/api/v1/courses/sis_course_id:%s?include=storage_quota_used_mb' % str(course_id)
