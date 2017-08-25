@@ -1,5 +1,5 @@
-# GET the tabs (left navigation items) from a course from the Canvas API
-# what we will do: given a list of courses, search each course for a left navigation item "syllabus", and find the visiblity setting
+# GET module items from a course from the Canvas API, given a spreadsheet with module ids
+# Please note that this does not include support for pagination if there are more than 100 module items in a module
 
 import requests
 import json
@@ -20,7 +20,7 @@ with open('modules.csv', 'rb') as csvfile:
         course_id = row[0]
         module_id = row[1]
 
-        url = 'https://harvard.instructure.com/api/v1/courses/%s/modules/%s/items' % (str(course_id), str(module_id))
+        url = 'https://harvard.instructure.com/api/v1/courses/%s/modules/%s/items?per_page=100' % (str(course_id), str(module_id))
         # call the API and reaise exceptions as needed
         headers = {
             'Authorization': 'Bearer {}'.format(oauth_token),
