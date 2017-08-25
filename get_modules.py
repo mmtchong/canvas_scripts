@@ -1,5 +1,5 @@
-# GET the tabs (left navigation items) from a course from the Canvas API
-# what we will do: given a list of courses, search each course for a left navigation item "syllabus", and find the visiblity setting
+# GET modules from a course from the Canvas API, produces a spreadsheet with module ids
+# Please note that this does not include support for pagination if there are more than 100 modules in a course
 
 import requests
 import json
@@ -18,7 +18,7 @@ counter = 0
 new_counter = 0
 for course_id in course_list:
     # loop over all of the courses in the course list
-    url = 'https://harvard.instructure.com/api/v1/courses/%s/modules' % str(course_id)
+    url = 'https://harvard.instructure.com/api/v1/courses/%s/modules?per_page=100' % str(course_id)
 
     # call the API and reaise exceptions as needed
     headers = {
