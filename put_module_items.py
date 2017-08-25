@@ -1,5 +1,4 @@
-# GET the tabs (left navigation items) from a course from the Canvas API
-# what we will do: given a list of courses, search each course for a left navigation item "syllabus", and find the visiblity setting
+# Edit module items from a spreadsheet using the Canvas API, given a spreadsheet with module items ids
 
 import requests
 import json
